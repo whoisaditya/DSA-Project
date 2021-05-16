@@ -63,8 +63,6 @@ public class PhoneBook
                 String address1 = " ";
                 address1 = addressReader.nextLine() + ", " + cityReader.nextLine() + ", " + countyReader.nextLine() + ", " + stateReader.nextLine() + ", " + zipReader.nextLine() ;
 
-                //System.out.println(address1);
-
                 directoryObj.addContact(name, phoneno1, phoneno2, email1, company1, address1);
             }
 
@@ -90,50 +88,55 @@ public class PhoneBook
         
         while (true) 
         {
-            String c = JOptionPane.showInputDialog(f,"Menu\n1. Add contact\n2. Search for Contact\n3. Exit\nEnter your choice");
-            
-            ch = Integer.parseInt(c);
+            String c;
+            try
+            {
+                c = JOptionPane.showInputDialog(f,"Menu\n1. Add contact\n2. Search for Contact\n3. Exit\nEnter your choice");
+                ch = Integer.parseInt(c);
+            }
+            catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(f, "Please Enter a Valid Option");
+                continue;
+            }
 
             switch (ch) 
             {
                 case 1: 
                 {
-                    String name1 = " ";
+                    String name1 = " ", email1 = " ", company1 = " ", address1 = " ";
                     long phoneno1 = 0, phoneno2 = 0;
-                    name1 = JOptionPane.showInputDialog(f, "Enter Name:");
 
                     try
                     {
-                    String ph1 = " ";
-                    ph1 = JOptionPane.showInputDialog(f, "Enter Phone Number 1: ");
-                    phoneno1 = Long.parseLong(ph1);
+                        name1 = JOptionPane.showInputDialog(f, "Enter Name:");
+
+                        try
+                        {
+                            String ph1 = " ";
+                            ph1 = JOptionPane.showInputDialog(f, "Enter Phone Number 1: ");
+                            phoneno1 = Long.parseLong(ph1);
+                
+                            String ph2 = " ";
+                            ph2 = JOptionPane.showInputDialog(f, "Enter Phone Number 2: ");
+                            phoneno2 = Long.parseLong(ph2);
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            JOptionPane.showMessageDialog(f, "Please Enter a Valid Phone Number");
+                            continue;
+                        }
+
+                        email1 = JOptionPane.showInputDialog(f, "Enter Email Id: ");
+                        
+                        company1 = JOptionPane.showInputDialog(f, "Enter Company Name: ");
+
+                        address1 = JOptionPane.showInputDialog(f, "Enter Address: ");
                     }
-                    catch(NumberFormatException e)
+                    catch(NullPointerException e)
                     {
-                        JOptionPane.showMessageDialog(f, "Please Enter a Valid Phone Number");
                         continue;
                     }
-
-                    try
-                    {
-                    String ph2 = " ";
-                    ph2 = JOptionPane.showInputDialog(f, "Enter Phone Number 2: ");
-                    phoneno2 = Long.parseLong(ph2);
-                    }
-                    catch(NumberFormatException e)
-                    {
-                        JOptionPane.showMessageDialog(f, "Please Enter a Valid Phone Number");
-                        continue;
-                    }
-
-                    String email1 = " ";
-                    email1 = JOptionPane.showInputDialog(f, "Enter Email Id: ");
-
-                    String company1 = " ";
-                    company1 = JOptionPane.showInputDialog(f, "Enter Company Name: ");
-
-                    String address1 = " ";
-                    address1 = JOptionPane.showInputDialog(f, "Enter Address: ");
 
                     directoryObj.addContact(name1, phoneno1, phoneno2, email1, company1, address1);
 
@@ -143,9 +146,15 @@ public class PhoneBook
                 case 2: 
                 {
                     String query;
-                    query = JOptionPane.showInputDialog(f, "Enter the first letter of the contact you want\n");
-
-                    query = query.substring(0, 1).toUpperCase() + query.substring(1);
+                    try
+                    {
+                        query = JOptionPane.showInputDialog(f, "Enter the first letter of the contact you want\n");
+                        query = query.substring(0, 1).toUpperCase() + query.substring(1);
+                    }
+                    catch(NullPointerException e)
+                    {
+                        continue;
+                    }
 
                     directoryObj.searchAndShowNoForAllCombination(query);
                     break;
