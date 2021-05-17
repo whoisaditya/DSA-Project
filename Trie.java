@@ -149,7 +149,7 @@ public class Trie
             jt.getColumnModel().getColumn(5).setPreferredWidth(500);
 
             f.add(sp);
-            f.setSize(1200, 500);
+            f.setSize(1200, 800);
             f.setVisible(true);
     }
     else
