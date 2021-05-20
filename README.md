@@ -16,6 +16,6 @@ Directions to Run:
 
 2.	There are two methods to run the program:
 
-a. Run the PhoneBook.jar file in a Java supported IDE
+      a. Run the PhoneBook.jar file in a Java supported IDE
 
-b. Run the main class which is PhoneBook.java in a Java supported IDE
+      b. Run the main class which is PhoneBook.java in a Java supported IDE
